@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biographies of the Companions - موسوعة الصحابة الكرام</title>
+    <style>
+        :root {
+            --primary-color: #1b4d3e;
+            --secondary-color: #c49a45;
+            --bg-color: #fcfbf7;
+            --text-color: #2b2b2b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.9;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 40px 10px;
+            border-bottom: 5px solid var(--secondary-color);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.3rem;
+        }
+
+        header p {
+            margin: 12px 0 0;
+            color: #e0e0e0;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .controls {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .controls select {
+            padding: 8px 15px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-family: inherit;
+        }
+
+        #stop-btn {
+            padding: 8px 15px;
+            background: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 50px;
+            font-size: 1.8rem;
+        }
+
+        .sahaba-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            margin-bottom: 35px;
+            border-right: 6px solid var(--secondary-color);
+        }
+
+        .fadl-card {
+            border-right-color: var(--primary-color);
+        }
+
+        .sahaba-name {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.6rem;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 8px;
+        }
+
+        /* ميزة التفاعل واللمس */
+        .speakable-segment {
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            display: inline;
+        }
+
+        .speakable-segment:hover {
+            background-color: rgba(196, 154, 69, 0.15);
+            color: var(--primary-color);
+        }
+
+        /* تأثير تظليل الكلمة التي تقرأ حالياً */
+        .highlight-word {
+            background-color: #ffe066 !important;
+            color: black !important;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .sahaba-card {
+                padding: 20px;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .controls select,
+            #stop-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>موسوعة الصحابة الكرام رضي الله عنهم</h1>
+        <p>المس أو اضغط على أي جملة للاستماع إليها بصوت القارئ مع التتبع التلقائي للكلمات</p>
+    </header>
+
+    <div class="container">
+        <!-- خيارات التحكم في الصوت -->
+        <div class="controls">
+            <label for="voice-select">اختر صوت الشيخ/القارئ المتاح في جهازك:</label>
+            <select id="voice-select"><option value="">جاري البحث عن الأصوات المتاحة...</option></select>
+            <button id="stop-btn">⏹️ إيقاف الصوت</button>
+        </div>
+
+        <!-- قسم سير الصحابة -->
+        <h2 class="section-title">من سير الصحابة العطرة بالتفصيل</h2>
+
+        <!-- 1. أبو بكر الصديق -->
+        <div class="sahaba-card">
+            <h3 class="sahaba-name">1. أبو بكر الصديق رضي الله عنه</h3>
+            <p>
+                <span class="speakable-segment">هو عبد الله بن أبي قحافة التيمي القرشي، أول الخلفاء الراشدين، وأقرب الصحابة إلى قلب النبي صلى الله عليه وسلم.</span>
+                <span class="speakable-segment">ولد في مكة المكرمة بعد عام الفيل بسنتين وستة أشهر، وكان يعمل بالتجارة ويتمتع بأخلاق رفيعة فلم يشرب الخمر قط في الجاهلية.</span>
+                <span class="speakable-segment">أول من أسلم من الرجال، ورافق النبي صلى الله عليه وسلم في الهجرة المباركة، وأنفق كل ماله في سبيل الله لتجهيز الجيوش وإعتاق العبيد المستضعفين مثل بلال بن رباح.</span>
+                <span class="speakable-segment">تولى الخلافة بعد وفاة النبي، فثبّت أركان الدولة الإسلامية وحارب المرتدين، وجمع القرآن الكريم لأول مرة في مصحف واحد.</span>
+                <span class="speakable-segment">توفي رضي الله عنه في يوم الاثنين الثاني والعشرين من جمادى الآخرة في السنة الثالثة عشرة للهجرة، عن عمر يناهز ثلاثاً وستين سنة، بعد أن اشتد عليه المرض، ودفن بجوار صاحب ورسول الله صلى الله عليه وسلم.</span>
+            </p>
+        </div>
+
+        <!-- 2. عمر بن الخطاب -->
+        <div class="sahaba-card">
+            <h3 class="sahaba-name">2. عمر بن الخطاب رضي الله عنه</h3>
+            <p>
+                <span class="speakable-segment">هو أبو حفص، عمر بن الخطاب العدوي القرشي، الملقب بالفاروق لأن الله فرق بإسلامه بين الحق والباطل.</span>
+                <span class="speakable-segment">كان إسلامه في السنة السادسة من البعثة النبوية عزاً كبيراً للمسلمين، حيث تمكنوا بعدها من الصلاة علانية عند الكعبة المشرفة.</span>
+                <span class="speakable-segment">تولى الخلافة بعهد من أبي بكر الصديق، فكان مثالاً أعلى للعدل والزهد، وأسس الدواوين وتاريخ الهجرة، وفتح في عهده بلاد الشام ومصر وفارس وبيت المقدس.</span>
+                <span class="speakable-segment">استشهد رضي الله عنه طعناً أثناء صلاة الفجر على يد أبي لؤلؤة المجوسي، ودُفن بجوار النبي صلى الله عليه وسلم وأبي بكر الصديق في شهر ذي الحجة سنة ثلاث وعشرين للهجرة، وكان عمره ثلاثاً وستين سنة.</span>
+            </p>
+        </div>
+
+        <!-- 3. عثمان بن عفان -->
+        <div class="sahaba-card">
+            <h3 class="sahaba-name">3. عثمان بن عفان رضي الله عنه</h3>
+            <p>
+                <span class="speakable-segment">هو أبو عمرو، عثمان بن عفان الأموي القرشي، الملقب بذو النورين لأنه تزوج من ابنتي الرسول صلى الله عليه وسلم، رقية ثم أم كلثوم.</span>
+                <span class="speakable-segment">تميز رضي الله عنه بالحياء الشديد والكرم اللامحدود، حيث جهز جيش العسرة من ماله الخاص، واشترى بئر رومة وجعلها وقفاً للمسلمين.</span>
+                <span class="speakable-segment">ثالث الخلفاء الراشدين، وفي عهده تم نسخ القرآن الكريم وإرسال المصاحف إلى الأمصار، وتوسعت الفتوحات الإسلامية لتشمل أراضٍ شاسعة.</span>
+                <span class="speakable-segment">استشهد رضي الله عنه صائماً في بيته بعد حصار جائر من الخوارج، حيث قُتل وهو يقرأ القرآن وسالت دماؤه على المصحف الشريف، وذلك في ذي الحجة سنة خمس وثلاثين للهجرة عن عمر تجاوز الثمانين سنة، ودفن بالبقيع.</span>
+            </p>
+        </div>
+
+        <!-- 4. علي بن أبي طالب -->
+        <div class="sahaba-card">
+            <h3 class="sahaba-name">4. علي بن أبي طالب رضي الله عنه</h3>
+            <p>
+                <span class="speakable-segment">هو أبو الحسن، علي بن أبي طالب الهاشمي القرشي، ابن عم رسول الله صلى الله عليه وسلم وصهره وزوج سيدة نساء أهل الجنة فاطمة الزهراء.</span>
+                <span class="speakable-segment">أول من أسلم من الصبيان، ونام في فراش النبي ليلة الهجرة ليرد الأمانات لأهلها، وعُرف بالشجاعة الفائقة، والبلاغة، والعلم الغزير في القضاء.</span>
+                <span class="speakable-segment">رابع الخلفاء الراشدين، تولى الخلافة في ظروف استثنائية، ونقل عاصمة الخلافة إلى الكوفة لإدارة شؤون الدولة المتسعة.</span>
+                <span class="speakable-segment">استشهد رضي الله عنه طعناً بسيف مسموم على يد عبد الرحمن بن ملجم الخارجي أثناء خروجه لصلاة الفجر في الكوفة، وذلك في شهر رمضان سنة أربعين للهجرة، عن عمر يناهز ثلاثاً وستين سنة.</span>
+            </p>
+        </div>
+
+        <!-- قسم فضل الصحابة بالتفصيل الكامل -->
+        <h2 class="section-title">فضل الصحابة الكرام بالتفصيل الكامل</h2>
+        <div class="sahaba-card fadl-card">
+            <p>
+                <span class="speakable-segment">إن فضل الصحابة الكرام رضي الله عنهم ثابت في أصول الدين، فهم الجيل الفريد الذي اختاره الله سبحانه لصحبة نبيه ونقل الرسالة للبشرية بكل أمانة.</span>
+                <span class="speakable-segment">وقد أثنى الله عليهم في القرآن الكريم ثناءً عاطراً، فقال عز وجل في سورة التوبة: "وَالسَّابِقُونَ الْأَوَّلُونَ مِنَ الْمُهَاجِرِينَ وَالْأَنصَارِ وَالَّذِينَ اتَّبَعُوهُم بِإِحْسَانٍ رَّضِيَ اللَّهُ عَنْهُمْ وَرَضُوا عَنْهُ وَأَعَدَّ لَهُمْ جَنَّاتٍ تَجْرِي تَحْتَهَا الْأَنْهَارُ خَالِدِينَ فِيهَا أَبَدًا ۚ ذَٰلِكَ الْفَوْزُ الْعَظِيمُ".</span>
+                <span class="speakable-segment">وفي السنة النبوية المطهرة، حذر النبي صلى الله عليه وسلم من سبهم أو النيل منهم، فقال: "لا تسبوا أصحابي، فلو أن أحدكم أنفق مثل أُحدٍ ذهباً ما بلغ مُدَّ أحدهم ولا نصيفه".</span>
+                <span class="speakable-segment">ويعتقد أهل السنة والجماعة أن حب الصحابة الكرام واجب إيماني، وأن أفضلهم على الإطلاق هو أبو بكر الصديق، ثم عمر بن الخطاب، ثم عثمان بن عفان، ثم علي بن أبي طالب، ويليهم باقي العشرة المبشرين بالجنة، ثم أهل بدر، ثم أهل بيعة الرضوان، رضي الله عنهم أجمعين ونفعنا بحبهم وسيرتهم.</span>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة للموقع - Biographies of the Companions</p>
+    </footer>
+
+    <script>
+        const voiceSelect = document.getElementById('voice-select');
+        const stopBtn = document.getElementById('stop-btn');
+        let voices = [];
+
+        // دالة جلب وتحديث قراء ومحركات الصوت بالجهاز
+        function populateVoiceList() {
+            if (typeof speechSynthesis === 'undefined') return;
+            voices = speechSynthesis.getVoices();
+            voiceSelect.innerHTML = '';
+            
+            // إعطاء الأولوية التامة للأصوات العربية المدمجة بالنظام
+            let arabicVoices = voices.filter(voice => voice.lang.includes('ar'));
+            
+            if(arabicVoices.length === 0) {
+                arabicVoices = voices; // تراجع للأصوات المتاحة إن لم يتوفر خيار عربي مخصص
+            }
+
+            if(arabicVoices.length === 0) {
+                const option = document.createElement('option');
+                option.textContent = "لم يتم العثور على محركات صوتية";
+                voiceSelect.appendChild(option);
+                return;
+            }
+
+            arabicVoices.forEach((voice) => {
+                const option = document.createElement('option');
+                option.textContent = `${voice.name} (${voice.lang})`;
+                option.setAttribute('data-lang', voice.lang);
+                option.setAttribute('data-name', voice.name);
+                voiceSelect.appendChild(option);
+            });
+        }
+
+        // تشغيل تفقد ومزامنة الأصوات
+        populateVoiceList();
+        if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = populateVoiceList;
+        }
+
+        // تفعيل زر إيقاف التلاوة الفوري
+        stopBtn.addEventListener('click', () => {
+            window.speechSynthesis.cancel();
+        });
+
+        // تفعيل ميزة النطق عند لمس العبارات
+        document.querySelectorAll('.speakable-segment').forEach(segment => {
+            segment.addEventListener('click', function() {
+                // إلغاء أي صوت نشط لمنع التداخل
+                window.speechSynthesis.cancel();
+
+                const textToSpeak = this.innerText;
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                
+                // ربط النص بالصوت المختار من القائمة
+                const selectedVoiceName = voiceSelect.selectedOptions[0]?.getAttribute('data-name');
+                const selectedVoice = voices.find(v => v.name === selectedVoiceName);
+                if (selectedVoice) {
+                    utterance.voice = selectedVoice;
+                }
+                
+                utterance.lang = 'ar-SA';
+                utterance.rate = 0.85; // سرعة مناسبة لقراءة السير التاريخية
+
+                const currentSegment = this;
+
+                // ميزة تظليل وتتبع الكلمات المباشرة
+                utterance.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        const charIndex = event.charIndex;
+                        const remainingText = textToSpeak.substring(charIndex);
+                        const nextSpaceIndex = remainingText.indexOf(' ');
+                        const wordLength = nextSpaceIndex === -1 ? remainingText.length : nextSpaceIndex;
+                        const currentWord = textToSpeak.substring(charIndex, charIndex + wordLength);
+                        
+                        const beforeWord = textToSpeak.substring(0, charIndex);
+                        const afterWord = textToSpeak.substring(charIndex + wordLength);
+                        
+                        currentSegment.innerHTML = `${beforeWord}<span class="highlight-word">${currentWord}</span>${afterWord}`;
+                    }
+                };
+
+                utterance.onstart = function() {
+                    currentSegment.classList.add('highlight-word');
+                };
+
+                utterance.onend = function() {
+                    currentSegment.classList.remove('highlight-word');
+                    currentSegment.innerHTML = textToSpeak; // تنظيف النص وإرجاعه لحالته الأصلية
+                };
+
+                window.speechSynthesis.speak(utterance);
+            });
+        });
+    </script>
+
+</body>
+</html>
