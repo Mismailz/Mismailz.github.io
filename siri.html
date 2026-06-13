@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="السيرة النبوية الشريفة - موقع تفاعلي">
+    <title>السيرة النبوية الشريفة التفاعلية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body { 
+            font-family: 'Droid Arabic Kufi', 'Times New Roman', serif; 
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px; 
+            direction: rtl;
+        }
+
+        .seerah-container { 
+            max-width: 900px; 
+            margin: 30px auto; 
+            background: #ffffff; 
+            padding: 40px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
+            border-top: 8px solid #1e4620;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 { 
+            color: #1e4620; 
+            font-size: 2.5rem; 
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #1e4620;
+            padding-bottom: 15px;
+        }
+
+        p { 
+            font-size: 1.4rem; 
+            line-height: 2.4; 
+            text-align: justify; 
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+        
+        /* تأثيرات لمس كلمات السيرة النبوية */
+        .quran-word {
+            color: #b8860b; 
+            font-weight: bold;
+            cursor: pointer;
+            border-bottom: 2px dotted #b8860b;
+            padding: 0 6px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .quran-word:hover {
+            background-color: #fdf5e6;
+            color: #8b6508;
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.2);
+        }
+
+        .quran-word.playing {
+            background-color: #ffe4b5;
+            animation: pulse 0.6s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        /* شريط التحكم بالصوت */
+        .audio-controls {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: center;
+            border-left: 4px solid #1e4620;
+        }
+
+        .audio-controls button {
+            background: #1e4620;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin: 5px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .audio-controls button:hover {
+            background: #2d6b2f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .audio-controls button:active {
+            transform: translateY(0);
+        }
+
+        .status {
+            font-size: 1.1rem;
+            color: #1e4620;
+            margin-top: 15px;
+            font-weight: bold;
+            min-height: 25px;
+        }
+
+        .playing-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #1e4620;
+            border-radius: 50%;
+            animation: blink 0.8s infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes blink {
+            0%, 49%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .seerah-container {
+                padding: 25px;
+                margin: 15px auto;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+                line-height: 2.2;
+            }
+
+            .audio-controls {
+                padding: 15px;
+            }
+
+            .audio-controls button {
+                padding: 10px 15px;
+                font-size: 0.95rem;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            color: #666;
+            margin-top: 30px;
+            font-size: 0.95rem;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="seerah-container">
+    <h1>🕌 السيرة النبوية الشريفة</h1>
+    <p class="subtitle">حياة سيدنا محمد صلى الله عليه وسلم</p>
+    
+    <p>
+        بدأت السيرة النبوية الشريفة منذ 
+        <span class="quran-word" data-sound="wahy.mp3">إرسال الله الوحي</span> 
+        على عبده ورسوله محمد صلى الله عليه وسلم في غار حراء، حيث نزل عليه جبريل عليه السلام بأول الآيات من سورة العلق. ومن هناك بدأت رحلة نشر دين الإسلام العظيم، واستمرت الدعوة المباركة والتعليم حتى 
+        <span class="quran-word" data-sound="wafat.mp3">وفاة النبي محمد</span> 
+        صلى الله عليه وسلم في المدينة المنورة بعد أن أدى الأمانة وبلغ الرسالة الشريفة وترك أمته على أحسن حال.
+    </p>
+
+    <p>
+        تميزت حياته صلى الله عليه وسلم بالصبر والحكمة، وواجه التحديات والمصاعب بثبات قلب، حتى تمكن من نشر التوحيد في جزيرة العرب، وأرسى قواعد دين الله الذي جاء به ليكون رحمة للعالمين. لقد كان 
+        <span class="quran-word" data-sound="akhlaq.mp3">النبي محمد خلقاً عظيماً</span> 
+        يقتدى به في كل جوانب الحياة.
+    </p>
+
+    <!-- شريط التحكم بالصوت -->
+    <div class="audio-controls">
+        <h3>🔊 التحكم بالصوت</h3>
+        <button id="toggle-audio" onclick="toggleAudioFeature()">
+            ✅ تفعيل الصوت
+        </button>
+        <button id="stop-audio" onclick="stopAudio()" disabled>
+            ⏹️ إيقاف
+        </button>
+        <div class="status" id="status"></div>
+        <div class="error-message" id="error-msg"></div>
+        <div class="success-message" id="success-msg"></div>
+    </div>
+
+    <p class="footer">
+        💝 صلى الله عليه وسلم | جميع الحقوق محفوظة © 2026
+    </p>
+</div>
+
+<!-- مشغل الصوت الخفي -->
+<audio id="audio-player" preload="auto"></audio>
+
+<script>
+    const player = document.getElementById('audio-player');
+    const statusEl = document.getElementById('status');
+    const errorMsg = document.getElementById('error-msg');
+    const successMsg = document.getElementById('success-msg');
+    const toggleBtn = document.getElementById('toggle-audio');
+    const stopBtn = document.getElementById('stop-audio');
+    
+    let audioEnabled = false;
+    let currentlyPlaying = null;
+
+    // تفعيل/تعطيل الصوت
+    function toggleAudioFeature() {
+        audioEnabled = !audioEnabled;
+        
+        if (audioEnabled) {
+            toggleBtn.textContent = '❌ تعطيل الصوت';
+            toggleBtn.style.background = '#d32f2f';
+            stopBtn.disabled = false;
+            showSuccess('✅ تم تفعيل الصوت - اضغط على الكلمات الذهبية');
+        } else {
+            toggleBtn.textContent = '✅ تفعيل الصوت';
+            toggleBtn.style.background = '#1e4620';
+            stopBtn.disabled = true;
+            statusEl.innerHTML = '';
+            showSuccess('تم تعطيل الصوت');
+        }
+    }
+
+    // إيقاف الصوت
+    function stopAudio() {
+        player.pause();
+        player.currentTime = 0;
+        if (currentlyPlaying) {
+            currentlyPlaying.classList.remove('playing');
+            currentlyPlaying = null;
+        }
+        statusEl.innerHTML = '';
+    }
+
+    // عرض رسالة نجاح
+    function showSuccess(message) {
+        successMsg.textContent = message;
+        successMsg.style.display = 'block';
+        setTimeout(() => {
+            successMsg.style.display = 'none';
+        }, 3000);
+    }
+
+    // عرض رسال�� خطأ
+    function showError(message) {
+        errorMsg.textContent = '⚠️ ' + message;
+        errorMsg.style.display = 'block';
+        setTimeout(() => {
+            errorMsg.style.display = 'none';
+        }, 4000);
+    }
+
+    // تشغيل الصوت
+    function playVoice(word) {
+        if (!audioEnabled) {
+            showError('الرجاء تفعيل الصوت أولاً');
+            return;
+        }
+
+        const file = word.getAttribute('data-sound');
+        if (!file) return;
+
+        // إذا كان نفس الملف يشتغل، قم بإيقافه
+        if (currentlyPlaying === word && !player.paused) {
+            stopAudio();
+            return;
+        }
+
+        // إزالة تأثير التشغيل من الكلمة السابقة
+        if (currentlyPlaying && currentlyPlaying !== word) {
+            currentlyPlaying.classList.remove('playing');
+        }
+
+        currentlyPlaying = word;
+        word.classList.add('playing');
+
+        // البحث عن الملف في مجلد audio
+        const audioPath = "audio/" + file;
+        player.src = audioPath;
+
+        // عرض حالة التشغيل
+        statusEl.innerHTML = '<span class="playing-indicator"></span>جاري التشغيل...';
+
+        player.play()
+            .then(() => {
+                statusEl.innerHTML = '<span class="playing-indicator"></span>تشغيل ' + word.textContent;
+            })
+            .catch(err => {
+                showError('لم يتم العثور على الملف: ' + file);
+                console.error('خطأ في التشغيل:', err);
+                word.classList.remove('playing');
+                statusEl.innerHTML = '';
+            });
+    }
+
+    // عند انتهاء التشغيل
+    player.addEventListener('ended', () => {
+        if (currentlyPlaying) {
+            currentlyPlaying.classList.remove('playing');
+        }
+        statusEl.innerHTML = '<span style="color: #4caf50;">✅ انتهى التشغيل</span>';
+        currentlyPlaying = null;
+    });
+
+    // معالجة الأخطاء
+    player.addEventListener('error', () => {
+        showError('خطأ في تشغيل الملف الصوتي');
+        if (currentlyPlaying) {
+            currentlyPlaying.classList.remove('playing');
+        }
+        statusEl.innerHTML = '';
+    });
+
+    // إضافة مستمعي الأحداث للكلمات
+    document.querySelectorAll('.quran-word').forEach(word => {
+        word.addEventListener('click', () => playVoice(word));
+        word.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            playVoice(word);
+        });
+        
+        // إضافة مؤشر أن الكلمة قابلة للنقر
+        word.title = 'انقر لتشغيل الصوت';
+    });
+
+    // توجيه المستخدم عند التحميل
+    window.addEventListener('load', () => {
+        showSuccess('👋 مرحباً! اضغط على "تفعيل الصوت" للبدء');
+    });
+</script>
+
+</body>
+</html>
