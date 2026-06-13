@@ -1,1 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أحصن الحصن - التحصينات الإسلامية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Amiri', serif; background-color: #f4f1ea; color: #2b2b2b; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .container { max-width: 850px; width: 100%; background: #ffffff; padding: 35px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #dfd8ca; }
+        h1 { font-family: 'Cairo', sans-serif; color: #1e3f20; text-align: center; margin-bottom: 5px; font-size: 26px; }
+        h2 { font-family: 'Cairo', sans-serif; color: #5c6b5e; text-align: center; margin-top: 0; margin-bottom: 30px; font-size: 16px; font-weight: 400; }
+        .instruction-note { background-color: #eef7f4; border-right: 5px solid #1e3f20; padding: 12px; border-radius: 6px; font-family: 'Cairo', sans-serif; font-size: 14px; color: #1e3f20; margin-bottom: 25px; }
+        select { width: 100%; padding: 14px; font-family: 'Cairo', sans-serif; font-size: 16px; border-radius: 10px; border: 2px solid #dfd8ca; margin-bottom: 25px; background-color: #faf9f6; color: #2b2b2b; }
+        select:focus { border-color: #1e3f20; box-shadow: 0 0 5px rgba(30, 63, 32, 0.1); }
+        .audio-player-container { position: sticky; top: 10px; background: #faf9f6; padding: 15px; border-radius: 12px; border: 1px solid #dfd8ca; margin-bottom: 25px; display: flex; flex-direction: column; }
+        audio { width: 100%; }
+        .current-info { font-family: 'Cairo', sans-serif; font-size: 14px; color: #1e3f20; font-weight: bold; margin-bottom: 10px; }
+        .hesn-item { background: #f9f7f3; border-right: 4px solid #1e3f20; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+        .hesn-item-title { color: #1e3f20; font-size: 18px; font-weight: bold; margin-bottom: 10px; font-family: 'Cairo', sans-serif; }
+        .hesn-text { font-size: 24px; line-height: 2.2; text-align: justify; word-spacing: 3px; margin-bottom: 15px; }
+        .hesn-benefit { background: #e8f5e9; padding: 10px; border-radius: 6px; margin-top: 10px; font-family: 'Cairo', sans-serif; font-size: 13px; color: #1b5e20; }
+        .word { display: inline-block; cursor: pointer; padding: 0 4px; border-radius: 4px; transition: all 0.2s; }
+        .word:hover { background-color: #f0ede4; color: #1e3f20; }
+        .word.interpreting { background-color: #ffecb3 !important; color: #b78103 !important; transform: scale(1.05); font-weight: bold; }
+        .play-button { background-color: #1e3f20; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 14px; margin-top: 10px; }
+        .play-button:hover { background-color: #2a5a2f; }
+        footer { text-align: center; margin-top: 40px; font-family: 'Cairo', sans-serif; font-size: 14px; color: #777; border-top: 1px solid #dfd8ca; padding-top: 15px; }
+        .back-link { text-align: center; margin-bottom: 20px; }
+        .back-link a { color: #1e3f20; text-decoration: none; font-family: 'Cairo', sans-serif; font-weight: bold; font-size: 16px; }
+        .back-link a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="index.html">← العودة إلى الصفحة الرئيسية</a>
+        </div>
+        <h1>أحصن الحصن 🛡️</h1>
+        <h2>التحصينات والأدعية الإسلامية مع التلاوة الصوتية</h2>
+        <div class="instruction-note">
+            💡 <strong>إرشادات الاستخدام:</strong><br>
+            • اختر التحصين من القائمة أسفله<br>
+            • اضغط على زر <strong>الاستماع</strong> لسماع التحصين بصوت واضح<br>
+            • اضغط على أي كلمة لسماع شرحها الصوتي الفوري
+        </div>
+        <select id="hesnaSelect" onchange="loadHesna(this.value)"><option value="">اختر التحصين...</option></select>
+        <div class="audio-player-container" id="audioContainer" style="display: none;">
+            <div class="current-info" id="currentHesnaInfo">اختر تحصين للاستماع</div>
+            <audio id="audioPlayer" controls></audio>
+        </div>
+        <audio id="interpretationPlayer"></audio>
+        <div id="hesnaContainer"></div>
+        <footer>جميع الحقوق محفوظة للموقع - تم التطوير لصالح حساب Mismailz</footer>
+    </div>
 
+    <script>
+        const hesnaData = [
+            {
+                id: 1,
+                title: "دعاء الصباح",
+                text: "اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ",
+                benefit: "يحمي المسلم في يومه ويجعله تحت حماية الله تعالى"
+            },
+            {
+                id: 2,
+                title: "دعاء المساء",
+                text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ",
+                benefit: "يحفظ المسلم ويعطيه العافية في الدنيا والآخرة"
+            },
+            {
+                id: 3,
+                title: "آية الكرسي",
+                text: "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ",
+                benefit: "عظيمة الفضل في حماية المنزل والحفاظ على النفس"
+            },
+            {
+                id: 4,
+                title: "سورة الفلق",
+                text: "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ مِن شَرِّ مَا خَلَقَ",
+                benefit: "سورة عظيمة في التحصين من الشرور والحسد"
+            },
+            {
+                id: 5,
+                title: "سورة الناس",
+                text: "قُلْ أَعُوذُ بِرَبِّ النَّاسِ مَلِكِ النَّاسِ إِلَٰهِ النَّاسِ",
+                benefit: "تحصين من الوسواس والشيطان"
+            }
+        ];
+
+        const audioPlayer = document.getElementById('audioPlayer');
+        const currentHesnaInfo = document.getElementById('currentHesnaInfo');
+
+        function init() {
+            const select = document.getElementById('hesnaSelect');
+            hesnaData.forEach(hesna => {
+                let option = document.createElement('option');
+                option.value = hesna.id;
+                option.textContent = hesna.title;
+                select.appendChild(option);
+            });
+        }
+
+        function loadHesna(hesnaId) {
+            if (!hesnaId) { 
+                document.getElementById('audioContainer').style.display = 'none'; 
+                document.getElementById('hesnaContainer').innerHTML = '';
+                return; 
+            }
+            
+            const hesna = hesnaData.find(h => h.id == hesnaId);
+            if (!hesna) return;
+
+            document.getElementById('audioContainer').style.display = 'flex';
+            const container = document.getElementById('hesnaContainer');
+            
+            container.innerHTML = '';
+            const hesnaItem = document.createElement('div');
+            hesnaItem.className = 'hesn-item';
+            
+            const title = document.createElement('div');
+            title.className = 'hesn-item-title';
+            title.textContent = hesna.title;
+            hesnaItem.appendChild(title);
+            
+            const textDiv = document.createElement('div');
+            textDiv.className = 'hesn-text';
+            const words = hesna.text.split(' ');
+            words.forEach(word => {
+                if (word.trim() === '') return;
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'word';
+                wordSpan.textContent = word + ' ';
+                wordSpan.addEventListener('click', () => interpretWordAudio(word, wordSpan));
+                textDiv.appendChild(wordSpan);
+            });
+            hesnaItem.appendChild(textDiv);
+            
+            const benefit = document.createElement('div');
+            benefit.className = 'hesn-benefit';
+            benefit.innerHTML = `<strong>الفائدة:</strong> ${hesna.benefit}`;
+            hesnaItem.appendChild(benefit);
+            
+            const playBtn = document.createElement('button');
+            playBtn.className = 'play-button';
+            playBtn.textContent = '🔊 استمع إلى التحصين';
+            playBtn.onclick = () => playHesna(hesna.title, hesnaId);
+            hesnaItem.appendChild(playBtn);
+            
+            container.appendChild(hesnaItem);
+        }
+
+        function playHesna(title, hesnaId) {
+            audioPlayer.pause();
+            currentHesnaInfo.textContent = `جاري تشغيل: ${title}`;
+            
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const hesna = hesnaData.find(h => h.id == hesnaId);
+                const utterance = new SpeechSynthesisUtterance(hesna.text);
+                utterance.lang = 'ar-SA';
+                utterance.rate = 0.8;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function interpretWordAudio(word, element) {
+            audioPlayer.pause();
+            document.querySelectorAll('.word').forEach(e => e.classList.remove('interpreting'));
+            element.classList.add('interpreting');
+            
+            const clean = word.replace(/[\u064B-\u065F\u0670]/g, '').replace(/[\ufd3f\ufd3e]/g, '').trim();
+            currentHesnaInfo.textContent = `شرح الكلمة: ${clean}`;
+            
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(clean);
+                utterance.lang = 'ar-SA';
+                utterance.rate = 0.85;
+                utterance.onend = () => element.classList.remove('interpreting');
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
